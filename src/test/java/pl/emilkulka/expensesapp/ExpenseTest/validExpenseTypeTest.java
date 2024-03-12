@@ -1,10 +1,9 @@
 package pl.emilkulka.expensesapp.ExpenseTest;
 
-import models.Expense;
+import pl.emilkulka.expensesapp.model.Expense;
 import org.junit.jupiter.api.Test;
-import enums.ExpenseTypes;
+import pl.emilkulka.expensesapp.enums.ExpenseTypes;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 

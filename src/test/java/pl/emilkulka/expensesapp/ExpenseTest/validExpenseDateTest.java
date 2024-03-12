@@ -1,7 +1,7 @@
 package pl.emilkulka.expensesapp.ExpenseTest;
 
-import exceptions.DateFromFutureException;
-import models.Expense;
+import pl.emilkulka.expensesapp.exception.DateFromFutureException;
+import pl.emilkulka.expensesapp.model.Expense;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,12 +22,9 @@ public class validExpenseDateTest {
     @Test
     void itDenyDateFromFuture() {
         Expense expense = new Expense();
-        try {
-            expense.setDate(LocalDate.of(2024,3,10));
-            fail("Should throw exception");
-        }catch (DateFromFutureException e) {
-            assertTrue(true);
-        }
+
+        assertThrows(DateFromFutureException.class,
+                () -> expense.setDate(LocalDate.of(2024,3,12)));
     }
 }
 

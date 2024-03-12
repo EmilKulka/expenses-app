@@ -1,7 +1,7 @@
 package pl.emilkulka.expensesapp.ExpenseTest;
 
-import exceptions.NegativePriceException;
-import models.Expense;
+import pl.emilkulka.expensesapp.exception.NegativePriceException;
+import pl.emilkulka.expensesapp.model.Expense;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,11 +24,7 @@ public class validExpensePriceTest {
     void itDenyInvalidPrice() {
         Expense expense = new Expense();
 
-        try {
-            expense.setPrice(BigDecimal.valueOf(-100));
-            fail("Exception should be raised.");
-        } catch (NegativePriceException e) {
-            assertTrue(true);
-        }
+        assertThrows(NegativePriceException.class,
+                () -> expense.setPrice(BigDecimal.valueOf(-100)));
     }
 }

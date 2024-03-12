@@ -1,7 +1,7 @@
 package pl.emilkulka.expensesapp.ExpenseTest;
 
-import exceptions.DescriptionLimitException;
-import models.Expense;
+import pl.emilkulka.expensesapp.exception.DescriptionLimitException;
+import pl.emilkulka.expensesapp.model.Expense;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,14 +22,11 @@ public class validExpenseDescriptionTest {
     void itDenyInvalidDescription() {
         Expense expense = new Expense();
 
-        try {
-            expense.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                    "Vivamus pulvinar gravida lorem sed posuere. Vivamus pulvinar gravida lorem sed posuere.");
-            fail("Exception should be raised.");
-        }catch (DescriptionLimitException e) {
-            assertTrue(true);
+        assertThrows(DescriptionLimitException.class,
+                () -> expense.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                        "Vivamus pulvinar gravida lorem sed posuere. Vivamus pulvinar gravida lorem sed posuere."));
         }
     }
 
 
-}
+
