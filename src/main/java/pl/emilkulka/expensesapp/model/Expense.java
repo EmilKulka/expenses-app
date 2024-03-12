@@ -1,16 +1,15 @@
-package models;
+package model;
 
 import enums.ExpenseTypes;
-import exceptions.DateFromFutureException;
-import exceptions.DescriptionLimitException;
-import exceptions.NegativePriceException;
+import exception.DateFromFutureException;
+import exception.DescriptionLimitException;
+import exception.NegativePriceException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @Getter
