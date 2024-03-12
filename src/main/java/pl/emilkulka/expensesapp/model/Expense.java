@@ -1,20 +1,28 @@
-package model;
+package pl.emilkulka.expensesapp.model;
 
-import enums.ExpenseTypes;
-import exception.DateFromFutureException;
-import exception.DescriptionLimitException;
-import exception.NegativePriceException;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import pl.emilkulka.expensesapp.enums.ExpenseTypes;
+import pl.emilkulka.expensesapp.exception.DateFromFutureException;
+import pl.emilkulka.expensesapp.exception.DescriptionLimitException;
+import pl.emilkulka.expensesapp.exception.NegativePriceException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Expense {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Enumerated(EnumType.STRING)
     private ExpenseTypes type;
     private String description;
     private BigDecimal price;

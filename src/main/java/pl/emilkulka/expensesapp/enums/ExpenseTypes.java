@@ -1,4 +1,4 @@
-package enums;
+package pl.emilkulka.expensesapp.enums;
 
 public enum ExpenseTypes {
     GROCERIESANDCHEMICALS,
