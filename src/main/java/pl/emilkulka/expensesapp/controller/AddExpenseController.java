@@ -1,44 +1,31 @@
 package pl.emilkulka.expensesapp.controller;
 
-import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import pl.emilkulka.expensesapp.model.Expense;
 import pl.emilkulka.expensesapp.repository.ExpenseRepository;
 
-import java.util.List;
-
-
 @Controller
-@RequestMapping("/")
-public class HomeController {
-
+@RequestMapping("/add-expense")
+public class AddExpenseController {
     private final ExpenseRepository expenseRepository;
-
     @Autowired
-    public HomeController(ExpenseRepository expenseRepository) {
+    public AddExpenseController(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
 
     @GetMapping()
-    private String home(Model model) {
+    private String test(Model model) {
         model.addAttribute("expenses", expenseRepository.findAll());
-        return "home";
+        return "add-expense";
     }
-
     @PostMapping
     private String addExpense(Expense expense) {
         expenseRepository.save(expense);
         return "redirect:/";
-    }
-
-    @GetMapping("/showexpenses")
-    @ResponseBody
-    public List<Expense> showExpenses() {
-            return expenseRepository.findAll();
     }
 }

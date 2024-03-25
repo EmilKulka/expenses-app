@@ -1,8 +1,6 @@
 package pl.emilkulka.expensesapp.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import pl.emilkulka.expensesapp.enums.ExpenseTypes;
 import pl.emilkulka.expensesapp.exception.DateFromFutureException;
 import pl.emilkulka.expensesapp.exception.DescriptionLimitException;
 import pl.emilkulka.expensesapp.exception.NegativePriceException;
@@ -12,7 +10,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -23,10 +21,29 @@ public class Expense {
     @GeneratedValue
     private Long id;
     @Enumerated(EnumType.STRING)
-    private ExpenseTypes type;
+    private ExpenseType type;
     private String description;
     private BigDecimal price;
     private LocalDate date;
+    private static Long idCount = 0L;
+
+    public Expense(ExpenseType type, String description, BigDecimal price, LocalDate date) {
+        this.id = ++idCount;
+        this.type = type;
+        if (isDescriptionInvalid(description)) {
+            throw new DescriptionLimitException();
+        }
+        this.description = description;
+        if (isPriceNegative(price)) {
+            throw new NegativePriceException();
+        }
+        this.price = price;
+        if(isDateFromFuture(date)) {
+            throw new DateFromFutureException();
+        }
+        this.date = date;
+        id ++;
+    }
 
     public boolean isDescriptionInvalid(String description) {
         return description.length() > 100;

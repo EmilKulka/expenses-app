@@ -2,7 +2,7 @@ package pl.emilkulka.expensesapp.ExpenseTest;
 
 import pl.emilkulka.expensesapp.model.Expense;
 import org.junit.jupiter.api.Test;
-import pl.emilkulka.expensesapp.enums.ExpenseTypes;
+import pl.emilkulka.expensesapp.model.ExpenseType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,8 +15,8 @@ public class validExpenseTypeTest {
     void isExpenseTypeValid() {
         Expense expense = new Expense();
 
-        expense.setType(ExpenseTypes.valueOf("GROCERIESANDCHEMICALS"));
-        List<ExpenseTypes> choices = Arrays.asList(ExpenseTypes.values());
+        expense.setType(ExpenseType.valueOf("GROCERIESANDCHEMICALS"));
+        List<ExpenseType> choices = Arrays.asList(ExpenseType.values());
 
         assertTrue(choices.contains(expense.getType()));
     }

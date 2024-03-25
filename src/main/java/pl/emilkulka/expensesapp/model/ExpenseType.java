@@ -1,6 +1,6 @@
-package pl.emilkulka.expensesapp.enums;
+package pl.emilkulka.expensesapp.model;
 
-public enum ExpenseTypes {
+public enum ExpenseType {
     GROCERIESANDCHEMICALS,
     SHOESANDCLOTHES,
     ACCESORIES,
