@@ -18,17 +18,15 @@ import java.time.LocalDate;
 public class Expense {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
     private ExpenseType type;
     private String description;
     private BigDecimal price;
     private LocalDate date;
-    private static Long idCount = 0L;
 
     public Expense(ExpenseType type, String description, BigDecimal price, LocalDate date) {
-        this.id = ++idCount;
         this.type = type;
         if (isDescriptionInvalid(description)) {
             throw new DescriptionLimitException();
@@ -42,7 +40,6 @@ public class Expense {
             throw new DateFromFutureException();
         }
         this.date = date;
-        id ++;
     }
 
     public boolean isDescriptionInvalid(String description) {
