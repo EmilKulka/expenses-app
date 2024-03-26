@@ -29,4 +29,10 @@ public class HomeController {
         model.addAttribute("expenses", expenseRepository.findAll());
         return "home";
     }
+
+    @PostMapping
+    private String deleteById(Long id) {
+        expenseRepository.deleteById(id);
+        return "redirect:/";
+    }
 }
