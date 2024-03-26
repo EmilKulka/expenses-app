@@ -35,10 +35,4 @@ public class HomeController {
         expenseRepository.save(expense);
         return "redirect:/";
     }
-
-    @GetMapping("/showexpenses")
-    @ResponseBody
-    public List<Expense> showExpenses() {
-            return expenseRepository.findAll();
-    }
 }

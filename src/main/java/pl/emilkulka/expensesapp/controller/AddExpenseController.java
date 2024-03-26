@@ -19,12 +19,11 @@ public class AddExpenseController {
     }
 
     @GetMapping()
-    private String test(Model model) {
-        model.addAttribute("expenses", expenseRepository.findAll());
+    private String addExpense() {
         return "add-expense";
     }
     @PostMapping
-    private String addExpense(Expense expense) {
+    private String saveExpense(Expense expense) {
         expenseRepository.save(expense);
         return "redirect:/";
     }
