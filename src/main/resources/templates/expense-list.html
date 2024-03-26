@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{fragments/header :: AppHeader }"></head>
+
+<body>
+
+<nav th:replace="~{fragments/navbar :: AppNavbar}"></nav>
+
+<main>
+    <section class="w-100 d-flex justify-content-center mt-5 text-white">
+        <table class="table-sm rounded caption-top bg-black bg-gradient w-50" style="--bs-bg-opacity: .75;">
+            <caption class="text-white">Lista Wydatków</caption>
+            <thead>
+            <tr>
+                <th>Rodzaj Wydatku</th>
+                <th>Opis</th>
+                <th>Koszt</th>
+                <th>Data</th>
+                <th>Akcje</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <tr th:each="expense : ${expenses}">
+                <td th:text="${expense.type}"></td>
+                <td th:text="${expense.description}"></td>
+                <td th:text="${expense.price + ' zł.'}"></td>
+                <td th:text="${expense.date}"></td>
+                <td>
+                    <form th:action="@{/expense-list}" method="post">
+                        <input type="hidden" name="id" th:value="${expense.id}"/>
+                        <button type="submit" class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

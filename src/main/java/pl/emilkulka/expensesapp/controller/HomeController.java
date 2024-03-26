@@ -13,22 +13,8 @@ import pl.emilkulka.expensesapp.repository.ExpenseRepository;
 @RequestMapping("/")
 public class HomeController {
 
-    private final ExpenseRepository expenseRepository;
-
-    @Autowired
-    public HomeController(ExpenseRepository expenseRepository) {
-        this.expenseRepository = expenseRepository;
-    }
-
     @GetMapping()
-    private String home(Model model) {
-        model.addAttribute("expenses", expenseRepository.findAll());
+    private String home() {
         return "home";
-    }
-
-    @PostMapping
-    private String deleteById(Long id) {
-        expenseRepository.deleteById(id);
-        return "redirect:/";
     }
 }
