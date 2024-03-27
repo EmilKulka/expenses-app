@@ -1,2 +1,4 @@
-package pl.emilkulka.expensesapp.exception.expense;public class InvalidTypeException {
+package pl.emilkulka.expensesapp.exception.expense;
+
+public class InvalidTypeException extends IllegalStateException{
 }
