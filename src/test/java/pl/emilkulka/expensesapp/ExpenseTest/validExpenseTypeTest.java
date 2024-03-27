@@ -1,5 +1,6 @@
 package pl.emilkulka.expensesapp.ExpenseTest;
 
+import pl.emilkulka.expensesapp.exception.expense.InvalidTypeException;
 import pl.emilkulka.expensesapp.model.Expense;
 import org.junit.jupiter.api.Test;
 import pl.emilkulka.expensesapp.model.ExpenseType;
@@ -12,12 +13,20 @@ import static org.junit.jupiter.api.Assertions.*;
 public class validExpenseTypeTest {
 
     @Test
-    void isExpenseTypeValid() {
+    void setTypeShouldWorkCorrectly() {
+        Expense expense = new Expense();
+        ExpenseType expectedType = ExpenseType.GROCERIESANDCHEMICALS;
+
+        expense.setType(expectedType);
+
+        assertEquals(expectedType, expense.getType());
+    }
+
+    @Test
+    void itDenyInvalidType() {
         Expense expense = new Expense();
 
-        expense.setType(ExpenseType.valueOf("GROCERIESANDCHEMICALS"));
-        List<ExpenseType> choices = Arrays.asList(ExpenseType.values());
-
-        assertTrue(choices.contains(expense.getType()));
+        assertThrows(InvalidTypeException.class,
+                () -> expense.setType(null));
     }
 }

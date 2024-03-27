@@ -1,6 +1,7 @@
 package pl.emilkulka.expensesapp.ExpenseTest;
 
-import pl.emilkulka.expensesapp.exception.DateFromFutureException;
+import org.springframework.cglib.core.Local;
+import pl.emilkulka.expensesapp.exception.expense.DateFromFutureException;
 import pl.emilkulka.expensesapp.model.Expense;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,12 +12,12 @@ import java.util.Date;
 public class validExpenseDateTest {
 
     @Test
-    void isDateValid() {
+    void setDateShouldWorkCorrectly() {
         Expense expense = new Expense();
 
         expense.setDate(LocalDate.of(2024, 2, 2));
 
-        assertEquals(new Date(2024,2,2), expense.getDate());
+        assertEquals(LocalDate.of(2024,2,2), expense.getDate());
     }
 
     @Test
@@ -24,7 +25,7 @@ public class validExpenseDateTest {
         Expense expense = new Expense();
 
         assertThrows(DateFromFutureException.class,
-                () -> expense.setDate(LocalDate.of(2024,3,12)));
+                () -> expense.setDate(LocalDate.now().plusDays(1)));
     }
 }
 

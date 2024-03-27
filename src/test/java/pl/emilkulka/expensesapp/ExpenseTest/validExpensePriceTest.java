@@ -1,6 +1,6 @@
 package pl.emilkulka.expensesapp.ExpenseTest;
 
-import pl.emilkulka.expensesapp.exception.NegativePriceException;
+import pl.emilkulka.expensesapp.exception.expense.NegativePriceException;
 import pl.emilkulka.expensesapp.model.Expense;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class validExpensePriceTest {
 
     @Test
-    void isPriceValid() {
+    void setPriceShouldWorkCorrectly() {
         Expense expense = new Expense();
 
         expense.setPrice(BigDecimal.valueOf(100));
