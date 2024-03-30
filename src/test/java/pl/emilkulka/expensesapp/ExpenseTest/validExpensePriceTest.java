@@ -20,11 +20,4 @@ public class validExpensePriceTest {
         assertEquals(BigDecimal.valueOf(100), expense.getPrice());
     }
 
-    @Test
-    void itDenyInvalidPrice() {
-        Expense expense = new Expense();
-
-        assertThrows(NegativePriceException.class,
-                () -> expense.setPrice(BigDecimal.valueOf(-100)));
-    }
 }

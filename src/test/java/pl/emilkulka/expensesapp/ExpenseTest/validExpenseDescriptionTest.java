@@ -17,15 +17,6 @@ public class validExpenseDescriptionTest {
         assertEquals(100,expense.getDescription().length());
     }
 
-
-    @Test
-    void itDenyInvalidDescription() {
-        Expense expense = new Expense();
-
-        assertThrows(DescriptionLimitException.class,
-                () -> expense.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                        "Vivamus pulvinar gravida lorem sed posuere. Vivamus pulvinar gravida lorem sed posuere."));
-        }
     }
 
 

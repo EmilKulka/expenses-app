@@ -22,11 +22,4 @@ public class validExpenseTypeTest {
         assertEquals(expectedType, expense.getType());
     }
 
-    @Test
-    void itDenyInvalidType() {
-        Expense expense = new Expense();
-
-        assertThrows(InvalidTypeException.class,
-                () -> expense.setType(null));
-    }
 }

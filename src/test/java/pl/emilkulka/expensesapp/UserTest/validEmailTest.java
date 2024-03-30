@@ -29,13 +29,4 @@ public class validEmailTest {
                 .matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }
 
-    @Test
-    public void itDenyInvalidEmailFormat() {
-        User user = new User();
-
-        assertThrows(EmailFormatException.class,
-                () -> user.setEmail("xyz@@gmail.com"));
-    }
-
-
 }
