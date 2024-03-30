@@ -23,19 +23,18 @@ if (alertTrigger) {
 
         const form = document.getElementById('expenseForm');
         if (form.checkValidity()) {
-
-            appendAlert('Wydatek został dodany!', 'success', 500);
-
-            setTimeout(() => {
-                form.submit();
-            }, 500);
+            // TO WYMAGA POPRAWY, ALERT WYSWIETLA SIE PRZED ERRORAMI
+            // appendAlert('Wydatek został dodany!', 'success', 500);
+             setTimeout(() => {
+                 form.submit();
+             }, 300);
         } else {
-
             Array.from(form.elements).forEach(element => {
                 if (!element.checkValidity()) {
                     element.classList.add('is-invalid');
                 }
             });
         }
+
     });
 }
