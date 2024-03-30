@@ -18,17 +18,10 @@ public class User {
     private String userName;
     private String password;
 
-    @Transient
-    private final EmailValidator emailValidator = new EmailValidator();
 
+    @Setter
     @Getter
     private String email;
 
-    public void setEmail(String email) {
-        if (!emailValidator.isValid(email)) {
-            throw new EmailFormatException();
-        }
-        this.email = email;
-    }
 }
 

@@ -1,6 +1,7 @@
 package pl.emilkulka.expensesapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import pl.emilkulka.expensesapp.exception.expense.DateFromFutureException;
 import pl.emilkulka.expensesapp.exception.expense.DescriptionLimitException;
 import pl.emilkulka.expensesapp.exception.expense.InvalidTypeException;
@@ -27,67 +28,17 @@ public class Expense {
     private Long id;
     @Enumerated(EnumType.STRING)
     private ExpenseType type;
+    @Size(min=1, max=100, message = "Niepoprawny opis!")
     private String description;
+    @Min(value=0, message = "Koszt nie może być ujemny!")
     private BigDecimal price;
+    @PastOrPresent(message = "Data powinna być teraźniejsza lub przeszła!")
     private LocalDate date;
 
-    @Transient
-    private final ExpenseTypeValidator expenseTypeValidator = new ExpenseTypeValidator();
-    @Transient
-    private final DescriptionValidator descriptionValidator = new DescriptionValidator();
-    @Transient
-    private final PriceValidator priceValidator = new PriceValidator();
-    @Transient
-    private final DateValidator dateValidator = new DateValidator();
-
     public Expense(ExpenseType type, String description, BigDecimal price, LocalDate date) {
-
-        if (expenseTypeValidator.isValid(type)) {
-            throw new InvalidTypeException();
-        }
         this.type = type;
-
-        if (descriptionValidator.isValid(description)) {
-            throw new DescriptionLimitException();
-        }
         this.description = description;
-
-        if (priceValidator.isValid(price)) {
-            throw new NegativePriceException();
-        }
         this.price = price;
-
-        if (dateValidator.isValid(date)) {
-            throw new DateFromFutureException();
-        }
-        this.date = date;
-    }
-
-    public void setType(ExpenseType type) {
-        if (expenseTypeValidator.isValid(type)) {
-            throw new InvalidTypeException();
-        }
-        this.type = type;
-    }
-
-    public void setDescription(String description) {
-        if (descriptionValidator.isValid(description)) {
-            throw new DescriptionLimitException();
-        }
-        this.description = description;
-    }
-
-    public void setPrice(BigDecimal price) {
-        if (priceValidator.isValid(price)) {
-            throw new NegativePriceException();
-        }
-        this.price = price;
-    }
-
-    public void setDate(LocalDate date) {
-        if (dateValidator.isValid(date)) {
-            throw new DateFromFutureException();
-        }
         this.date = date;
     }
 }
