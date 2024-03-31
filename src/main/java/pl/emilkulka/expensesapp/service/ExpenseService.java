@@ -13,8 +13,6 @@ import pl.emilkulka.expensesapp.validator.expense.DescriptionValidator;
 import pl.emilkulka.expensesapp.validator.expense.ExpenseTypeValidator;
 import pl.emilkulka.expensesapp.validator.expense.PriceValidator;
 
-import java.time.LocalDate;
-
 @Service
 public class ExpenseService {
 
@@ -49,6 +47,18 @@ public class ExpenseService {
             throw new DateFromFutureException();
         }
 
+        expenseRepository.save(expense);
+    }
+
+    public void deleteById(Long id) {
+        expenseRepository.deleteById(id);
+    }
+
+    public Expense getExpenseById(Long id) {
+        return expenseRepository.findById(id).get();
+    }
+
+    public void updateExpense(Expense expense) {
         expenseRepository.save(expense);
     }
 }
