@@ -1,10 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+
+<head th:replace="~{fragments/header :: AppHeader }"></head>
 <body>
-$END$
+
+<nav th:replace="~{fragments/navbar :: AppNavbar}"></nav>
+
+<main>
+    <section class="w-100 vh-100 d-flex justify-content-center align-items-center">
+        <div class="position-fixed top-50 start-50 translate-middle" id="liveAlertPlaceholder"></div>
+        <div class="container rounded bg-black bg-gradient w-50" style="--bs-bg-opacity: .75;">
+            <form id="expenseForm"  th:action="@{/expense-list/{id} (id=${expense.id})}" th:object="${expense}" method="post">
+                <label class="form-label text-white mb-2 mt-2">Rodzaj wydatku</label>
+                <select name="type" class="form-select mb-3" aria-label="Default select example" required>
+                    <option selected disabled value="">Wybierz</option>
+                    <option value="GROCERIESANDCHEMICALS">Zakupy spożywcze i chemia</option>
+                    <option value="SHOESANDCLOTHES">Obuwie i ubrania</option>
+                    <option value="ACCESORIES">Akcesoria</option>
+                    <option value="REGULARPAYMENTS">Płatności regularne</option>
+                </select>
+                <div class="invalid-feedback">
+                    Wybierz rodzaj wydatku.
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white mb-2">Opis</label>
+                    <input th:field="*{description}" name="description" type="text" class="form-control"
+                           placeholder="Opisz swój wydatek w 100 znakach." required>
+                    <p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}"></p>
+                    <div class="invalid-feedback">
+                        Proszę podać opis.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white mb-2">Koszt</label>
+                    <input th:field="*{price}" type="number" class="form-control"  step="0.01" required>
+                    <p class="text-danger" th:if="${#fields.hasErrors('price')}" th:errorclass="error" th:errors="*{price}"></p>
+                    <div class="invalid-feedback">
+                        Proszę podać koszt.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white mb-2">Data</label>
+                    <input th:field="*{date}" name="date" type="date" class="form-control" required>
+                    <p class="text-danger" th:if="${#fields.hasErrors('date')}" th:errorclass="error" th:errors="*{date}"></p>
+                    <div class="invalid-feedback">
+                        Proszę podać date.
+                    </div>
+                </div>
+                <button id="liveAlertBtn" type="submit" class="btn btn-primary mb-3">Dodaj</button>
+            </form>
+        </div>
+    </section>
+</main>
+<script src="/js/alert.js"></script>
+
 </body>
 </html>
