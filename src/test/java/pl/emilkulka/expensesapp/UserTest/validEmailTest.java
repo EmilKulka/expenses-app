@@ -1,8 +1,7 @@
 package pl.emilkulka.expensesapp.UserTest;
 
 import org.junit.jupiter.api.Test;
-import pl.emilkulka.expensesapp.exception.user.EmailFormatException;
-import pl.emilkulka.expensesapp.model.User;
+import pl.emilkulka.expensesapp.model.AppUser;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
@@ -12,7 +11,7 @@ public class validEmailTest {
 
     @Test
     public void isEmailValid() {
-        User user = new User();
+        AppUser user = new AppUser();
 
         user.setEmail("xyz@gmail.com");
 
@@ -21,7 +20,7 @@ public class validEmailTest {
 
     @Test
     public void isEmailFormatValid() {
-        User user = new User();
+        AppUser user = new AppUser();
 
         user.setEmail("xyz@gmail.com");
 

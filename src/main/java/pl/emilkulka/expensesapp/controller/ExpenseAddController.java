@@ -1,6 +1,7 @@
 package pl.emilkulka.expensesapp.controller;
 
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +19,13 @@ import pl.emilkulka.expensesapp.repository.ExpenseRepository;
 import pl.emilkulka.expensesapp.service.ExpenseService;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/expense-add")
 public class ExpenseAddController {
+
     private final ExpenseRepository expenseRepository;
     private final ExpenseService expenseService;
 
-    @Autowired
-    public ExpenseAddController(ExpenseRepository expenseRepository, ExpenseService expenseService) {
-        this.expenseRepository = expenseRepository;
-        this.expenseService = expenseService;
-    }
 
     @GetMapping()
     private String expenseAdd(Model model) {
