@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>expenses-app</title>
-    <link rel="stylesheet" th:href="@{../css/styles.css}">
-</head>
+
+<head th:replace="~{fragments/header :: AppHeader }"></head>
+
 <body>
-<div class="container">
-    <div class="message" th:if="${param.error}">
+<div class="container rounded bg-black bg-gradient w-50 text-white" style="--bs-bg-opacity: .75;">
+    <div class="alert alert-danger" role="alert" th:if="${param.error}">
         Nieprawidłowy E-mail lub hasło!
     </div>
-    <div class="message" th:if="${param.logout}">
+    <div class="alert alert-success" role="alert" th:if="${param.logout}">
         Wylogowano!
     </div>
 
-    <h2>Witaj w expenses-app!</h2>
-    <form
-            th:action="@{/login}"
-            method="post"
-    >
+    <h2 class="text-center" >Witaj w expenses-app!</h2>
 
+    <form th:action="@{/login}" method="post">
 
-        <div class="form-group">
-            <label for="username">Email:</label>
-            <input type="email" id="username" name="username" placeholder="Enter your email" required>
+        <div class="mb-3">
+            <label class="form-label" for="username">Email:</label>
+            <input class="form-control" type="email" id="username" name="username" placeholder="Podaj Email" required>
         </div>
 
-        <div class="form-group">
-            <label for="password">Hasło:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <div class="mb-3">
+            <label class="form-label" for="password">Hasło:</label>
+            <input class="form-control" type="password" id="password" name="password" placeholder="Podaj hasło" required>
         </div>
-        <input type="submit" value="Zaloguj się">
-        <a th:href="@{/registration}">Zarejestruj się</a>
+
+        <div class="mb-1 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary mb-3">Zaloguj się</button>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center">
+            <p>Nie masz konta? <a th:href="@{/registration}">Zarejestruj się</a></p>
+        </div>
+
+
     </form>
 
 </div>

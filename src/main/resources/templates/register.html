@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-    <link rel="stylesheet" th:href="@{../css/styles.css}">
-</head>
+
+<head th:replace="~{fragments/header :: AppHeader }"></head>
+
 <body>
-<div class="container">
-    <div class="message" th:if="${message != null}">
+<div class="container rounded bg-black bg-gradient w-50 text-white" style="--bs-bg-opacity: .75;">
+    <div class="alert alert-success" role="alert" th:if="${message != null}">
         [[${message}]]
     </div>
-    <h2>Rejestracja</h2>
-    <form
-            th:action="@{/registration}"
-            method="post"
-            role="form"
-            th:object="${user}"
-    >
-        <div class="form-group">
-            <label for="username">Nazwa użytkownika:</label>
-            <input th:field="*{userName}" type="text" id="username" name="username" placeholder="Enter your username" required>
+    <h2 class="text-center">Rejestracja</h2>
+    <form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+
+        <div class="mb-3">
+            <label class="form-label" for="username">Nazwa użytkownika:</label>
+            <input class="form-control" th:field="*{userName}" type="text" id="username" name="username" placeholder="Podaj nazwę użytkownika" required>
         </div>
 
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input th:field="*{email}" type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="mb-3">
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" th:field="*{email}" type="email" id="email" name="email" placeholder="Podaj Email" required>
         </div>
 
-        <div class="form-group">
-            <label for="password">Hasło:</label>
-            <input th:field="*{password}" type="password" id="password" name="password" placeholder="Enter your password" required>
+        <div class="mb-3">
+            <label class="form-label" for="password">Hasło:</label>
+            <input class="form-control" th:field="*{password}" type="password" id="password" name="password" placeholder="Podaj hasło" required>
         </div>
-        <input type="submit" value="Register">
-        <a th:href="@{/login}">Login</a>
+        <div class="mb-1 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary mb-3">Zarejestruj się</button>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center">
+            <p>Masz już konto? <a th:href="@{/login}">Zaloguj się</a></p>
+        </div>
     </form>
 
 </div>
