@@ -16,11 +16,7 @@ import pl.emilkulka.expensesapp.service.UserService;
 public class AppUserController {
 
     @Autowired
-    private  UserService userService;
-
-    @Autowired
-    private AppUserDetailsService appUserDetailsService;
-
+    private UserService userService;
 
     @GetMapping("/registration")
     public String getRegistrationPage(@ModelAttribute("user") AppUserDto userDto) {
@@ -33,7 +29,6 @@ public class AppUserController {
         model.addAttribute("message", "Zarejestrowano pomyślnie!");
         return "register";
     }
-
 
     @GetMapping("/login")
     public String login() {

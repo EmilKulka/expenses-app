@@ -1,6 +1,5 @@
 package pl.emilkulka.expensesapp.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,7 +9,6 @@ import pl.emilkulka.expensesapp.model.AppUser;
 import pl.emilkulka.expensesapp.repository.UserRepository;
 import pl.emilkulka.expensesapp.security.AppUserDetails;
 
-import java.util.Optional;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService {

@@ -9,7 +9,7 @@
 
 <main>
     <section class="d-flex justify-content-center mt-5">
-            <div class="overflow-auto" style="max-height: 50vh;">
+        <div class="overflow-auto" style="max-height: 50vh;">
             <table class="table-sm rounded bg-black bg-gradient text-white" style="--bs-bg-opacity: .75;">
                 <thead>
                 <tr>
@@ -27,11 +27,12 @@
                     <td th:text="${expense.price + ' zł.'}"></td>
                     <td th:text="${expense.date}"></td>
                     <td class="d-flex">
-                        <form th:action="@{/expense-list}" method="post">
+                        <form th:action="@{/api/expense-list/delete}" method="post">
                             <input type="hidden" name="id" th:value="${expense.id}"/>
                             <button type="submit" class="btn btn-danger">Usuń</button>
                         </form>
-                        <a class="btn btn-primary" th:href="@{/expense-list/edit/{id} (id=${expense.id})}">Edytuj</a>
+                        <a class="btn btn-primary"
+                           th:href="@{/api/expense-list/update/{id} (id=${expense.id})}">Edytuj</a>
                     </td>
                 </tr>
                 </tbody>

@@ -2,43 +2,47 @@ package pl.emilkulka.expensesapp.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.emilkulka.expensesapp.exception.expense.DateFromFutureException;
-import pl.emilkulka.expensesapp.exception.expense.DescriptionLimitException;
-import pl.emilkulka.expensesapp.exception.expense.InvalidTypeException;
-import pl.emilkulka.expensesapp.exception.expense.NegativePriceException;
+import pl.emilkulka.expensesapp.model.AppUser;
 import pl.emilkulka.expensesapp.model.Expense;
-import pl.emilkulka.expensesapp.repository.ExpenseRepository;
 import pl.emilkulka.expensesapp.service.ExpenseService;
+import pl.emilkulka.expensesapp.service.UserService;
+
+import java.security.Principal;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/expense-add")
+@RequestMapping("/api/expense-add")
 public class ExpenseAddController {
 
-    private final ExpenseRepository expenseRepository;
     private final ExpenseService expenseService;
-
+    private final UserService userService;
 
     @GetMapping()
-    private String expenseAdd(Model model) {
+    private String addExpense(Model model) {
         model.addAttribute("expense", new Expense());
         return "expense-add";
     }
 
     @PostMapping
-    private String saveExpense(@Valid Expense expense, BindingResult bindingResult, Model model) {
-        if(bindingResult.hasErrors()) {
+    private String saveExpense(@Valid Expense expense, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
             return "expense-add";
         }
+
+        /*
+    Retrieving the logged-in user's username -> searching for the user in the database by username -> setting the user ID in the expense
+    */
+        String userName = principal.getName();
+        AppUser appUser = userService.findByUsername(userName);
+        expense.setUser(appUser);
+
         expenseService.saveExpense(expense);
-        return "redirect:/expense-add";
+        return "redirect:/api/expense-add";
     }
 }

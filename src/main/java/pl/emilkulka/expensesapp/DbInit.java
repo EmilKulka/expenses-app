@@ -26,11 +26,17 @@ public class DbInit implements CommandLineRunner {
     private final UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
-
     @Override
     public void run(String... args) throws Exception {
-        expenseRepository.saveAll(List.of(new Expense(GROCERIESANDCHEMICALS,"Zakupy biedronka.", BigDecimal.valueOf(55.10), LocalDate.now()),
-                new Expense(SHOESANDCLOTHES,"Zakupy Zara.", BigDecimal.valueOf(199.99),LocalDate.now())));
-        userRepository.save(new AppUser("Emil Kulka", passwordEncoder.encode("1234"), "emil53@onet.pl", AppUserRole.USER));
+        AppUser user = userRepository.findByEmail("emil53@onet.pl");
+        if (user == null) {
+            userRepository.save(new AppUser("Emil Kulka", passwordEncoder.encode("1234"), "emil53@onet.pl", AppUserRole.USER));
+            user = userRepository.findByEmail("emil53@onet.pl");
+        }
+
+        expenseRepository.saveAll(List.of(
+                new Expense(GROCERIESANDCHEMICALS, "Zakupy biedronka.", BigDecimal.valueOf(55.10), LocalDate.now(), user),
+                new Expense(SHOESANDCLOTHES, "Zakupy Zara.", BigDecimal.valueOf(199.99), LocalDate.now(), user)
+        ));
     }
 }

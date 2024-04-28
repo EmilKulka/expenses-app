@@ -10,7 +10,7 @@
     <section class="w-100 vh-100 d-flex justify-content-center align-items-center">
         <div class="position-fixed top-50 start-50 translate-middle" id="liveAlertPlaceholder"></div>
         <div class="container rounded bg-black bg-gradient w-50" style="--bs-bg-opacity: .75;">
-            <form id="expenseForm"  th:action="@{/expense-add}" th:object="${expense}" method="post">
+            <form id="expenseForm"  th:action="@{/api/expense-add}" th:object="${expense}" method="post">
                 <label class="form-label text-white mb-2 mt-2">Rodzaj wydatku</label>
                 <select name="type" class="form-select mb-3" aria-label="Default select example" required>
                     <option selected disabled value="">Wybierz</option>
